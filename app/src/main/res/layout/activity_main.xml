@@ -24,6 +24,14 @@
             android:gravity="center"
             android:text="paging3"
             android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/room"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="room"
+            android:textAllCaps="false" />
     </LinearLayout>
 
 </ScrollView>

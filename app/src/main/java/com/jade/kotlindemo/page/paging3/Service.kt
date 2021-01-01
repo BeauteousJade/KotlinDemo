@@ -1,4 +1,4 @@
-package com.jade.kotlindemo.paging3
+package com.jade.kotlindemo.page.paging3
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

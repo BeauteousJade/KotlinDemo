@@ -20,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".page.FlowActivity" />
+        <activity android:name=".page.flow.FlowActivity" />
+        <activity android:name="com.jade.kotlindemo.page.room.RoomActivity" />
     </application>
 
 </manifest>

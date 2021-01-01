@@ -1,10 +1,12 @@
-package com.jade.kotlindemo.room.dao
+package com.jade.kotlindemo.page.room.dao
 
+import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.jade.kotlindemo.room.bean.User
+import com.jade.kotlindemo.page.room.bean.User
 
+@Dao
 interface UserDao {
 
     @Query("Select * from user")
@@ -15,6 +17,9 @@ interface UserDao {
 
     @Delete
     fun delete(user: User)
+
+    @Query("delete from user")
+    fun clearUser();
 
     @Insert
     fun insertUser(vararg users: User)

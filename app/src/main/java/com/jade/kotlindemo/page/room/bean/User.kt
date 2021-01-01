@@ -1,4 +1,4 @@
-package com.jade.kotlindemo.room.bean
+package com.jade.kotlindemo.page.room.bean
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -6,11 +6,15 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class User(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(
         name = "user_id"
     )
-    val userId: String,
+    val userId: Int = 0,
+    @ColumnInfo(
+        name = "name"
+    )
+    val name: String,
     @ColumnInfo(
         name = "age"
     )

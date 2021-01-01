@@ -1,4 +1,4 @@
-package com.jade.kotlindemo.paging3
+package com.jade.kotlindemo.page.paging3
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

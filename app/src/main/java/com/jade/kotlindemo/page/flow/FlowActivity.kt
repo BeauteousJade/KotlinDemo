@@ -1,4 +1,4 @@
-package com.jade.kotlindemo.page
+package com.jade.kotlindemo.page.flow
 
 import android.os.Bundle
 import android.util.Log
