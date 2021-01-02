@@ -35,6 +35,7 @@ class CustomRemoteMediator : RemoteMediator<Int, Message>() {
         }
         val messages = Service.create().getMessage(20, startIndex)
         DataBaseHelper.dataBase.withTransaction {
+            Log.i("pby123", "loadType = $loadType")
             if (loadType == LoadType.REFRESH) {
                 mMessageDao.clearMessage()
             }
