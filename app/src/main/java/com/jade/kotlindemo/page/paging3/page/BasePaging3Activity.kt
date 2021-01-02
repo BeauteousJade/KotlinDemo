@@ -1,39 +1,39 @@
-package com.jade.kotlindemo.page.paging3
+package com.jade.kotlindemo.page.paging3.page
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.jade.kotlindemo.R
+import com.jade.kotlindemo.page.paging3.CustomAdapter
+import com.jade.kotlindemo.page.paging3.NetWorkViewModel
+import com.jade.kotlindemo.page.paging3.dataBase.Message
 import kotlinx.android.synthetic.main.activity_paging3.*
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.distinctUntilChangedBy
-import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.*
 
-class Paging3Activity : AppCompatActivity() {
+abstract class BasePaging3Activity : AppCompatActivity() {
+
+    private lateinit var mMessageFlow: Flow<PagingData<Message>>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_paging3)
+        setContentView(getLayoutId())
 
         val swipeRefreshLayout = findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        val viewModel by viewModels<CustomViewModel> {
-            object : ViewModelProvider.Factory {
-                override fun <T : ViewModel?> create(modelClass: Class<T>) = CustomViewModel() as T
-            }
-        }
+        mMessageFlow = getMessageFlow()
         val adapter = CustomAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         lifecycleScope.launchWhenCreated {
-            viewModel.messageFlow.collectLatest {
+            mMessageFlow.collectLatest {
                 adapter.submitData(it)
             }
         }
@@ -53,6 +53,10 @@ class Paging3Activity : AppCompatActivity() {
         swipeRefreshLayout.setOnRefreshListener {
             adapter.refresh()
         }
-
     }
+
+    @LayoutRes
+    protected abstract fun getLayoutId(): Int
+
+    protected abstract fun getMessageFlow(): Flow<PagingData<Message>>
 }

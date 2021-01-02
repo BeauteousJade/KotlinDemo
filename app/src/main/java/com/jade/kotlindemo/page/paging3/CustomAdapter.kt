@@ -1,5 +1,6 @@
 package com.jade.kotlindemo.page.paging3
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -9,14 +10,16 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.jade.kotlindemo.R
+import com.jade.kotlindemo.page.paging3.dataBase.Message
 import java.util.*
 
 class CustomAdapter :
     PagingDataAdapter<Message, CustomAdapter.CustomViewHolder>(CustomDiffUtilCallback()) {
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         getItem(position)?.let {
-            holder.titleView.text = it.title
+            holder.titleView.text = "${it.title}, position = $position"
             holder.contentView.text = it.content
             holder.itemView.setBackgroundColor(Color.parseColor(generateColor()))
         }

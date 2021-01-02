@@ -11,5 +11,5 @@ data class UserAndLibrary(
         parentColumn = "user_id",
         entityColumn = "library_id"
     )
-    val library: UserAndLibrary
+    val library: Library
 )

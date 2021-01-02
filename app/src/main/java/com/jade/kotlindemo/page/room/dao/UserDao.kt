@@ -1,9 +1,6 @@
 package com.jade.kotlindemo.page.room.dao
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.jade.kotlindemo.page.room.bean.User
 import com.jade.kotlindemo.page.room.bean.UserAndLibrary
 
@@ -24,7 +21,4 @@ interface UserDao {
 
     @Insert
     fun insertUser(vararg users: User)
-
-    @Query("select * from user")
-    fun getUserAndLibraries(): List<UserAndLibrary>
 }

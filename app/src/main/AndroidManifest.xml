@@ -22,6 +22,9 @@
         </activity>
         <activity android:name=".page.flow.FlowActivity" />
         <activity android:name="com.jade.kotlindemo.page.room.RoomActivity" />
+        <activity android:name=".page.paging3.Paging3RouterActivity" />
+        <activity android:name=".page.paging3.page.Paging3WithNetWorkActivity" />
+        <activity android:name=".page.paging3.page.Paging3WithNetworkAndDataBaseActivity" />
     </application>
 
 </manifest>

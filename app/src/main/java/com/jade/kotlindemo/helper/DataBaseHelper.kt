@@ -8,11 +8,11 @@ import com.jade.kotlindemo.page.room.AppDataBase
 class DataBaseHelper {
     companion object {
 
-        var dataBase: AppDataBase? = null
+        lateinit var dataBase: AppDataBase
 
         @MainThread
         fun initDataBase(context: Context) {
-            if (dataBase != null) {
+            if (this::dataBase.isInitialized) {
                 return
             }
             dataBase = Room.databaseBuilder(context, AppDataBase::class.java, "dataBase")
