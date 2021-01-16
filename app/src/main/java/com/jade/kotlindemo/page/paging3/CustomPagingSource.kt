@@ -1,6 +1,8 @@
 package com.jade.kotlindemo.page.paging3
 
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.jade.kotlindemo.page.paging3.dataBase.Message
 
 class CustomPagingSource : PagingSource<Int, Message>() {
@@ -13,5 +15,13 @@ class CustomPagingSource : PagingSource<Int, Message>() {
             e.printStackTrace()
             LoadResult.Error(e)
         }
+    }
+
+    override val jumpingSupported: Boolean
+        get() = true
+
+    @ExperimentalPagingApi
+    override fun getRefreshKey(state: PagingState<Int, Message>): Int? {
+        return 1
     }
 }

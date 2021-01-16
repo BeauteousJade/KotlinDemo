@@ -2,6 +2,7 @@ package com.jade.kotlindemo.page.paging3
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,7 @@ class CustomAdapter :
             holder.titleView.text = "${it.title}, position = $position"
             holder.contentView.text = it.content
             holder.itemView.setBackgroundColor(Color.parseColor(generateColor()))
+            Log.i("pby123", "itemCount = $itemCount")
         }
     }
 
