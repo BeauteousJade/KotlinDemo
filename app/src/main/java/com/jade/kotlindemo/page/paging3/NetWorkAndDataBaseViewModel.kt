@@ -10,7 +10,7 @@ import com.jade.kotlindemo.helper.DataBaseHelper
 
 class NetWorkAndDataBaseViewModel : ViewModel() {
     @ExperimentalPagingApi
-    val messageFlow = Pager(PagingConfig(20), remoteMediator = CustomRemoteMediator()) {
+    val messageFlow = Pager(PagingConfig(20, jumpThreshold = 100), remoteMediator = CustomRemoteMediator()) {
         DataBaseHelper.dataBase.messageDao().getMessage()
     }.flow.cachedIn(viewModelScope)
 }

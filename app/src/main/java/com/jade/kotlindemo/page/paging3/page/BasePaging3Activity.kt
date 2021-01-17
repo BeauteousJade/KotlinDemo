@@ -1,6 +1,7 @@
 package com.jade.kotlindemo.page.paging3.page
 
 import android.os.Bundle
+import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -19,6 +20,8 @@ abstract class BasePaging3Activity : AppCompatActivity() {
 
     protected lateinit var mAdapter: CustomAdapter
     private lateinit var mMessageFlow: Flow<PagingData<Message>>
+
+    @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())

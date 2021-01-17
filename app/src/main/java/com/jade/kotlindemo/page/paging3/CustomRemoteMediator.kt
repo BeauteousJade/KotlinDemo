@@ -8,7 +8,6 @@ import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.jade.kotlindemo.helper.DataBaseHelper
 import com.jade.kotlindemo.page.paging3.dataBase.Message
-import java.lang.StringBuilder
 
 @ExperimentalPagingApi
 class CustomRemoteMediator : RemoteMediator<Int, Message>() {
@@ -29,18 +28,31 @@ class CustomRemoteMediator : RemoteMediator<Int, Message>() {
                     stringBuilder.append("size = ${it.data.size}, count = ${it.data.count()}\n")
                 }
                 Log.i("pby123", stringBuilder.toString())
-                count += 20
+                count += state.config.initialLoadSize
                 count
             }
         }
-        val messages = Service.create().getMessage(20, startIndex)
-        DataBaseHelper.dataBase.withTransaction {
-            Log.i("pby123", "loadType = $loadType")
-            if (loadType == LoadType.REFRESH) {
-                mMessageDao.clearMessage()
+        val pages = state.pages
+        var totalCount = 0
+        if(pages.isNotEmpty()){
+            pages.forEach {
+                totalCount += it.data.size + it.itemsBefore + it.itemsAfter
             }
-            mMessageDao.insertMessage(messages)
         }
-        return MediatorResult.Success(messages.isEmpty())
+
+        Log.i("pby123", "CustomRemoteMediator,loadType = $loadType, totalCount = $totalCount")
+        return try {
+            val messages = Service.create().getMessage(state.config.initialLoadSize, startIndex)
+            DataBaseHelper.dataBase.withTransaction {
+                if (loadType == LoadType.REFRESH) {
+                    mMessageDao.clearMessage()
+                }
+                mMessageDao.insertMessage(messages)
+            }
+            MediatorResult.Success(messages.isEmpty())
+        } catch (e: Exception) {
+            MediatorResult.Error(e)
+        }
+
     }
 }
