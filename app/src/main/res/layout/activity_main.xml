@@ -32,6 +32,14 @@
             android:gravity="center"
             android:text="room"
             android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/animation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="animation"
+            android:textAllCaps="false" />
     </LinearLayout>
 
 </ScrollView>

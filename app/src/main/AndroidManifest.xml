@@ -26,6 +26,7 @@
         <activity android:name=".page.paging3.Paging3RouterActivity" />
         <activity android:name=".page.paging3.page.Paging3WithNetWorkActivity" />
         <activity android:name=".page.paging3.page.Paging3WithNetworkAndDataBaseActivity" />
+        <activity android:name=".page.animation.AnimationActivity" />
     </application>
 
 </manifest>
