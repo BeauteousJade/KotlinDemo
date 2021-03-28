@@ -8,7 +8,7 @@
         android:id="@+id/add_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="添加用户" />
+        android:text="添加User" />
 
     <Button
         android:id="@+id/clear_user"
@@ -16,10 +16,17 @@
         android:layout_height="wrap_content"
         android:text="清空User" />
 
+    <Button
+        android:id="@+id/update_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="更新User"
+        android:textAllCaps="false" />
+
     <androidx.constraintlayout.helper.widget.Flow
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="add_user,clear_user"
+        app:constraint_referenced_ids="add_user,clear_user,update_user"
         app:flow_wrapMode="chain"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
