@@ -55,12 +55,7 @@ public class MyConstraintLayout extends ConstraintLayout {
             resolveMeasuredDimension(widthMeasureSpec, heightMeasureSpec, mLayoutWidget.getWidth(), mLayoutWidget.getHeight(), mLayoutWidget.isWidthMeasuredTooSmall(), mLayoutWidget.isHeightMeasuredTooSmall());
             return true;
         }
-        if (mOnMeasureWidthMeasureSpec == widthMeasureSpec && MeasureSpec.getMode(
-                widthMeasureSpec
-        ) == MeasureSpec.EXACTLY && MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.AT_MOST && MeasureSpec.getMode(
-                mOnMeasureHeightMeasureSpec
-        ) == MeasureSpec.AT_MOST
-        ) {
+        if (mOnMeasureWidthMeasureSpec == widthMeasureSpec && MeasureSpec.getMode(widthMeasureSpec) == MeasureSpec.EXACTLY && MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.AT_MOST && MeasureSpec.getMode(mOnMeasureHeightMeasureSpec) == MeasureSpec.AT_MOST) {
             int newSize = MeasureSpec.getSize(heightMeasureSpec);
             if (newSize >= mLayoutWidget.getHeight()) {
                 mOnMeasureWidthMeasureSpec = widthMeasureSpec;
