@@ -11,6 +11,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.jade.kotlindemo.R
+import com.jade.kotlindemo.helper.Utils
 import com.jade.kotlindemo.page.paging3.dataBase.Message
 import java.util.*
 
@@ -22,7 +23,7 @@ class CustomAdapter :
         getItem(position)?.let {
             holder.titleView.text = "${it.title}, position = $position"
             holder.contentView.text = it.content
-            holder.itemView.setBackgroundColor(Color.parseColor(generateColor()))
+            holder.itemView.setBackgroundColor(Color.parseColor(Utils.generateColor()))
             Log.i("pby123", "itemCount = $itemCount")
         }
     }
@@ -31,20 +32,6 @@ class CustomAdapter :
         return CustomViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.layout_item_view, parent, false)
         )
-    }
-
-    private fun generateColor(): String {
-        val random = Random()
-        val red = Integer.toHexString(random.nextInt(256)).run {
-            if (length == 1) "0$this" else this
-        }
-        val green = Integer.toHexString(random.nextInt(256)).run {
-            if (length == 1) "0$this" else this
-        }
-        val blue = Integer.toHexString(random.nextInt(256)).run {
-            if (length == 1) "0$this" else this
-        }
-        return "#${red}${green}${blue}"
     }
 
 

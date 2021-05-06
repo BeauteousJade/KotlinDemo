@@ -3,15 +3,14 @@ package com.jade.kotlindemo.page.constraint
 import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
-import android.view.View
+import android.widget.Button
 
-class MyView @JvmOverloads constructor(
+class MyButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : View(context, attrs, defStyleAttr) {
-
+) : androidx.appcompat.widget.AppCompatButton(context, attrs, defStyleAttr) {
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        Log.i("pby123", "MyView onMeasure")
+        Log.i("pby123", "MyButton onMeasure")
     }
 }
