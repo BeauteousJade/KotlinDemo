@@ -10,6 +10,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class MyConstraintLayout extends ConstraintLayout {
 
+    private boolean mMeasureOpt = true;
+
     private int mOnMeasureWidthMeasureSpec = 0;
     private int mOnMeasureHeightMeasureSpec = 0;
 
@@ -29,10 +31,13 @@ public class MyConstraintLayout extends ConstraintLayout {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
+    public void setMeasureOpt(boolean measureOpt) {
+        mMeasureOpt = measureOpt;
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-
-        if (skipMeasure(widthMeasureSpec, heightMeasureSpec)) {
+        if (mMeasureOpt && skipMeasure(widthMeasureSpec, heightMeasureSpec)) {
             return;
         }
         mOnMeasureWidthMeasureSpec = widthMeasureSpec;
@@ -40,6 +45,9 @@ public class MyConstraintLayout extends ConstraintLayout {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
+    /**
+     * 用以判断是否跳过本次Measure。
+     */
     private boolean skipMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         if (mDirtyHierarchy) {
             return false;

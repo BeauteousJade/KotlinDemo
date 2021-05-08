@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_optimizationLevel="graph">
+    app:layout_optimizationLevel="graph|graph_wrap">
 
     <com.jade.kotlindemo.page.constraint.MyView
         android:id="@+id/view"
@@ -16,8 +16,8 @@
 
     <com.jade.kotlindemo.page.constraint.MyButton
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:background="#123"
         android:padding="10dp"
         android:text="123123"
@@ -25,6 +25,7 @@
         app:layout_constraintTop_toBottomOf="@id/view" />
 
     <com.jade.kotlindemo.page.constraint.MyImageView
+        android:id="@+id/imageView"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@mipmap/ic_launcher"
@@ -32,10 +33,28 @@
         app:layout_constraintLeft_toRightOf="@id/button"
         app:layout_constraintTop_toTopOf="@id/button" />
 
+    <View
+        android:id="@+id/animate_view"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="#345"
+        app:layout_constraintBottom_toBottomOf="@id/button"
+        app:layout_constraintLeft_toRightOf="@id/imageView"
+        app:layout_constraintTop_toTopOf="@id/button" />
+
+    <Button
+        android:id="@+id/click_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="点我"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button" />
+
     <com.jade.kotlindemo.page.constraint.MyRecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
