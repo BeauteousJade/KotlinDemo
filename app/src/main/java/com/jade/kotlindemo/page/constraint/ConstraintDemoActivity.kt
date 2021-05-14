@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jade.kotlindemo.R
+import com.jade.kotlindemo.helper.recyclerview.MyAdapter
 
 class ConstraintDemoActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.jade.kotlindemo.page.constraint
+package com.jade.kotlindemo.helper.recyclerview
 
 import android.graphics.Color
 import android.view.LayoutInflater
