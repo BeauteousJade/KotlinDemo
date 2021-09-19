@@ -10,6 +10,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.jade.kotlindemo.helper.DataBaseHelper
 import com.jade.kotlindemo.page.animation.AnimationActivity
+import com.jade.kotlindemo.page.aspectj.AspectJDemoActivity
 import com.jade.kotlindemo.page.constraint.ConstraintDemoActivity
 import com.jade.kotlindemo.page.flow.FlowActivity
 import com.jade.kotlindemo.page.fragment.TestFragmentActivity
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         addPage<AnimationActivity>("animation")
         addPage<ConstraintDemoActivity>("constraintDemo")
         addPage<TestFragmentActivity>("testFragment")
+        addPage<AspectJDemoActivity>("AspectJDemo")
     }
 
     private fun init() {
