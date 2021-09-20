@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.view.NestedScrollingChild3
 import androidx.core.view.NestedScrollingChildHelper
 import androidx.core.view.ViewCompat
+import androidx.core.widget.NestedScrollView
 import kotlin.math.abs
 import kotlin.math.max
 
@@ -16,9 +17,16 @@ class CustomNestedViewGroup @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ViewGroup(context, attrs, defStyleAttr), NestedScrollingChild3 {
 
+
+    companion object {
+        const val INVALID_POINTER = -1
+    }
+
+
     private var mIsBeingDragged = false
     private var mLastMotionY = 0
     private var mNestedYOffset = 0
+    private var mActivePointerId = INVALID_POINTER
 
     private val mNestedScrollingChildHelper: NestedScrollingChildHelper =
         NestedScrollingChildHelper(this)
@@ -75,12 +83,21 @@ class CustomNestedViewGroup @JvmOverloads constructor(
 
         when (action) {
             MotionEvent.ACTION_DOWN -> {
+                mActivePointerId = ev.getPointerId(0)
                 mLastMotionY = ev.y.toInt()
                 startNestedScroll(ViewCompat.SCROLL_AXIS_VERTICAL, ViewCompat.TYPE_TOUCH)
 
             }
             MotionEvent.ACTION_MOVE -> {
-                val y = ev.y.toInt()
+                val activePointerId = mActivePointerId
+                if (activePointerId == INVALID_POINTER) {
+                    return mIsBeingDragged
+                }
+                val pointerIndex = ev.findPointerIndex(activePointerId)
+                if (pointerIndex == -1) {
+                    return mIsBeingDragged
+                }
+                val y = ev.getY(pointerIndex).toInt()
                 val deltaY = abs(y - mLastMotionY)
                 if (deltaY > mTouchSlop) {
                     mIsBeingDragged = true
@@ -95,9 +112,22 @@ class CustomNestedViewGroup @JvmOverloads constructor(
                 mIsBeingDragged = false
                 stopNestedScroll(ViewCompat.TYPE_TOUCH)
             }
+            MotionEvent.ACTION_POINTER_UP -> {
+                onSecondaryPointerUp(ev)
+            }
         }
         Log.i("pby123", "mIsBeingDragged = $mIsBeingDragged")
         return mIsBeingDragged
+    }
+
+    private fun onSecondaryPointerUp(event: MotionEvent) {
+        val pointerIndex = event.actionIndex
+        val pointerId = event.getPointerId(pointerIndex)
+        if (pointerId == mActivePointerId) {
+            val newPointerIndex = if (pointerIndex == 0) 1 else 0
+            mLastMotionY = event.getY(newPointerIndex).toInt()
+            mActivePointerId = event.getPointerId(newPointerIndex)
+        }
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -107,11 +137,17 @@ class CustomNestedViewGroup @JvmOverloads constructor(
         }
         when (action) {
             MotionEvent.ACTION_DOWN -> {
+                mActivePointerId = event.getPointerId(0)
                 mLastMotionY = event.y.toInt()
                 startNestedScroll(ViewCompat.SCROLL_AXIS_VERTICAL, ViewCompat.TYPE_TOUCH)
             }
             MotionEvent.ACTION_MOVE -> {
-                val y = event.y.toInt()
+                val pointerIndex = event.findPointerIndex(mActivePointerId)
+                if (pointerIndex == -1) {
+                    return true
+                }
+
+                val y = event.getY(pointerIndex).toInt()
                 var deltaY = mLastMotionY - y
                 if (!mIsBeingDragged && abs(deltaY) > mTouchSlop) {
                     parent?.let {
@@ -159,10 +195,20 @@ class CustomNestedViewGroup @JvmOverloads constructor(
                 }
             }
             MotionEvent.ACTION_UP -> {
+                mActivePointerId = INVALID_POINTER
                 endDrag()
             }
             MotionEvent.ACTION_CANCEL -> {
+                mActivePointerId = INVALID_POINTER
                 endDrag()
+            }
+            MotionEvent.ACTION_POINTER_DOWN -> {
+                val newPointerIndex = event.actionIndex
+                mLastMotionY = event.getY(newPointerIndex).toInt()
+                mActivePointerId = event.getPointerId(newPointerIndex)
+            }
+            MotionEvent.ACTION_POINTER_UP -> {
+                onSecondaryPointerUp(event)
             }
         }
 
