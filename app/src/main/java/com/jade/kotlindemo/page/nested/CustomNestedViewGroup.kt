@@ -4,8 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
+import android.view.VelocityTracker
 import android.view.ViewConfiguration
 import android.view.ViewGroup
+import android.widget.OverScroller
 import androidx.core.view.NestedScrollingChild3
 import androidx.core.view.NestedScrollingChildHelper
 import androidx.core.view.ViewCompat
@@ -27,19 +29,22 @@ class CustomNestedViewGroup @JvmOverloads constructor(
     private var mLastMotionY = 0
     private var mNestedYOffset = 0
     private var mActivePointerId = INVALID_POINTER
+    private var mVelocityTracker: VelocityTracker? = null
+    private var mLastScrollY = 0
 
     private val mNestedScrollingChildHelper: NestedScrollingChildHelper =
         NestedScrollingChildHelper(this)
     private val mTouchSlop: Int
     private val mMinimumVelocity: Int
     private val mMaximumVelocity: Int
-
+    private val mOverScroller: OverScroller
     private val mScrollConsumed: IntArray = IntArray(2)
     private val mScrollOffset: IntArray = IntArray(2)
 
     init {
         isNestedScrollingEnabled = true
-        val configuration = ViewConfiguration.get(getContext())
+        mOverScroller = OverScroller(context)
+        val configuration = ViewConfiguration.get(context)
         mTouchSlop = configuration.scaledTouchSlop
         mMinimumVelocity = configuration.scaledMinimumFlingVelocity
         mMaximumVelocity = configuration.scaledMaximumFlingVelocity
@@ -85,6 +90,10 @@ class CustomNestedViewGroup @JvmOverloads constructor(
             MotionEvent.ACTION_DOWN -> {
                 mActivePointerId = ev.getPointerId(0)
                 mLastMotionY = ev.y.toInt()
+                iniOrResetVelocityTracker()
+                mVelocityTracker?.addMovement(ev)
+                mOverScroller.computeScrollOffset()
+                mIsBeingDragged = !mOverScroller.isFinished
                 startNestedScroll(ViewCompat.SCROLL_AXIS_VERTICAL, ViewCompat.TYPE_TOUCH)
 
             }
@@ -101,22 +110,25 @@ class CustomNestedViewGroup @JvmOverloads constructor(
                 val deltaY = abs(y - mLastMotionY)
                 if (deltaY > mTouchSlop) {
                     mIsBeingDragged = true
+                    initVelocityTrackerIfNoExists()
+                    mVelocityTracker?.addMovement(ev)
                     mNestedYOffset = 0
                     mLastMotionY = y
                     parent?.let {
-                        parent.requestDisallowInterceptTouchEvent(true)
+                        it.requestDisallowInterceptTouchEvent(true)
                     }
                 }
             }
             MotionEvent.ACTION_CANCEL, MotionEvent.ACTION_UP -> {
                 mIsBeingDragged = false
+                mActivePointerId = INVALID_POINTER
+                recyclerVelocityTracker()
                 stopNestedScroll(ViewCompat.TYPE_TOUCH)
             }
             MotionEvent.ACTION_POINTER_UP -> {
                 onSecondaryPointerUp(ev)
             }
         }
-        Log.i("pby123", "mIsBeingDragged = $mIsBeingDragged")
         return mIsBeingDragged
     }
 
@@ -127,6 +139,9 @@ class CustomNestedViewGroup @JvmOverloads constructor(
             val newPointerIndex = if (pointerIndex == 0) 1 else 0
             mLastMotionY = event.getY(newPointerIndex).toInt()
             mActivePointerId = event.getPointerId(newPointerIndex)
+            mVelocityTracker?.let {
+                it.clear()
+            }
         }
     }
 
@@ -135,8 +150,18 @@ class CustomNestedViewGroup @JvmOverloads constructor(
         if (action == MotionEvent.ACTION_DOWN) {
             mNestedYOffset = 0
         }
+        val vtev = MotionEvent.obtain(event)
+        Log.i("pby123", "mNestedYOffset = $mNestedYOffset, y = ${event.getY(mActivePointerId)}")
+        vtev.offsetLocation(0f, mNestedYOffset.toFloat())
         when (action) {
             MotionEvent.ACTION_DOWN -> {
+                if (mIsBeingDragged) {
+                    parent?.let {
+                        it.requestDisallowInterceptTouchEvent(true)
+                    }
+                }
+                abortAnimateScroll()
+
                 mActivePointerId = event.getPointerId(0)
                 mLastMotionY = event.y.toInt()
                 startNestedScroll(ViewCompat.SCROLL_AXIS_VERTICAL, ViewCompat.TYPE_TOUCH)
@@ -151,7 +176,7 @@ class CustomNestedViewGroup @JvmOverloads constructor(
                 var deltaY = mLastMotionY - y
                 if (!mIsBeingDragged && abs(deltaY) > mTouchSlop) {
                     parent?.let {
-                        requestDisallowInterceptTouchEvent(true)
+                        it.requestDisallowInterceptTouchEvent(true)
                     }
                     mIsBeingDragged = true
                     if (deltaY > 0) {
@@ -160,7 +185,6 @@ class CustomNestedViewGroup @JvmOverloads constructor(
                         deltaY += mTouchSlop
                     }
                 }
-                Log.i("pby123", "deltalY = $deltaY")
                 if (mIsBeingDragged) {
                     if (dispatchNestedPreScroll(
                             0,
@@ -177,7 +201,20 @@ class CustomNestedViewGroup @JvmOverloads constructor(
 
                     val oldScrollY = scrollY
                     val range = getScrollRange()
-                    overScrollBy(0, deltaY, 0, oldScrollY, 0, range, 0, 0, true)
+                    if (overScrollBy(
+                            0,
+                            deltaY,
+                            0,
+                            oldScrollY,
+                            0,
+                            range,
+                            0,
+                            0,
+                            true
+                        ) && !hasNestedScrollingParent(ViewCompat.TYPE_TOUCH)
+                    ) {
+                        mVelocityTracker?.clear()
+                    }
                     val scrollDeltaY = scrollY - oldScrollY
                     val unconsumedY = deltaY - scrollDeltaY
                     mScrollConsumed[1] = 0
@@ -196,6 +233,16 @@ class CustomNestedViewGroup @JvmOverloads constructor(
             }
             MotionEvent.ACTION_UP -> {
                 mActivePointerId = INVALID_POINTER
+                val velocityTracker = mVelocityTracker
+                velocityTracker?.computeCurrentVelocity(1000, mMaximumVelocity.toFloat())
+                // 向上滑动速度为负，向下滑动速度为正
+                val initVelocity = velocityTracker?.getYVelocity(mActivePointerId)?.toInt() ?: 0
+                if (abs(initVelocity) > mMinimumVelocity) {
+                    if (!dispatchNestedPreFling(0F, -initVelocity.toFloat())) {
+                        dispatchNestedFling(0F, -initVelocity.toFloat(), true)
+                        fling(-initVelocity.toFloat())
+                    }
+                }
                 endDrag()
             }
             MotionEvent.ACTION_CANCEL -> {
@@ -212,7 +259,92 @@ class CustomNestedViewGroup @JvmOverloads constructor(
             }
         }
 
+        mVelocityTracker?.let {
+            it.addMovement(vtev)
+        }
+        vtev.recycle()
+
         return true
+    }
+
+
+    override fun computeScroll() {
+        if (mOverScroller.isFinished) {
+            return
+        }
+        mOverScroller.computeScrollOffset()
+        val y = mOverScroller.currY
+        var deltaY = y - mLastScrollY
+        mLastScrollY = y
+        mScrollConsumed[1] = 0
+        dispatchNestedPreScroll(0, deltaY, mScrollConsumed, null, ViewCompat.TYPE_NON_TOUCH)
+        deltaY -= mScrollConsumed[1]
+        val range = getScrollRange()
+        if (deltaY != 0) {
+            val oldScrollY = scrollY
+            overScrollBy(0, deltaY, 0, oldScrollY, 0, range, 0, 0, false)
+            val consumedY = scrollY - oldScrollY
+            deltaY -= consumedY
+            mScrollConsumed[1] = 0
+            dispatchNestedScroll(
+                0,
+                consumedY,
+                0,
+                deltaY,
+                null,
+                ViewCompat.TYPE_NON_TOUCH,
+                mScrollConsumed
+            )
+            deltaY -= mScrollConsumed[1]
+        }
+        if (deltaY != 0) {
+            abortAnimateScroll()
+        }
+        if (!mOverScroller.isFinished) {
+            ViewCompat.postInvalidateOnAnimation(this)
+        } else {
+            abortAnimateScroll()
+        }
+    }
+
+    private fun iniOrResetVelocityTracker() {
+        mVelocityTracker = mVelocityTracker?.let {
+            it.clear()
+            it
+        } ?: kotlin.run {
+            VelocityTracker.obtain()
+        }
+    }
+
+    private fun initVelocityTrackerIfNoExists() {
+        if (mVelocityTracker == null) {
+            mVelocityTracker = VelocityTracker.obtain()
+        }
+    }
+
+    private fun recyclerVelocityTracker() {
+        mVelocityTracker = mVelocityTracker?.let {
+            it.recycle()
+            null
+        }
+    }
+
+    private fun fling(velocityY: Float) {
+        mOverScroller.fling(0, scrollY, 0, velocityY.toInt(), 0, 0, Int.MIN_VALUE, Int.MAX_VALUE)
+        runAnimatedScroll()
+    }
+
+    private fun runAnimatedScroll() {
+        startNestedScroll(ViewCompat.SCROLL_AXIS_VERTICAL, ViewCompat.TYPE_NON_TOUCH)
+        mLastMotionY = scrollY
+        ViewCompat.postInvalidateOnAnimation(this)
+    }
+
+    private fun abortAnimateScroll() {
+        if (!mOverScroller.isFinished) {
+            mOverScroller.abortAnimation()
+            stopNestedScroll(ViewCompat.TYPE_NON_TOUCH)
+        }
     }
 
 
