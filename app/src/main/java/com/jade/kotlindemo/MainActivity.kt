@@ -14,6 +14,7 @@ import com.jade.kotlindemo.page.aspectj.AspectJDemoActivity
 import com.jade.kotlindemo.page.constraint.ConstraintDemoActivity
 import com.jade.kotlindemo.page.flow.FlowActivity
 import com.jade.kotlindemo.page.fragment.TestFragmentActivity
+import com.jade.kotlindemo.page.nested.NestedScrollActivity
 import com.jade.kotlindemo.page.paging3.Paging3RouterActivity
 import com.jade.kotlindemo.page.paging3.page.Paging3WithNetWorkActivity
 import com.jade.kotlindemo.page.room.RoomActivity
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         addPage<ConstraintDemoActivity>("constraintDemo")
         addPage<TestFragmentActivity>("testFragment")
         addPage<AspectJDemoActivity>("AspectJDemo")
+        addPage<NestedScrollActivity>("nestedScroll")
     }
 
     private fun init() {

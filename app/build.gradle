@@ -78,4 +78,6 @@ dependencies {
 
     api 'org.aspectj:aspectjrt:1.9.5'
 
+    implementation 'com.google.android.material:material:1.4.0'
+
 }

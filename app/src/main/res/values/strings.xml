@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">KotlinDemo</string>
+    <string name="text"> 熟悉ConstraintLayout的同学都知道ConstraintLayout内部的子View最少会measure两次，一旦内部有某些View的measure阶段比较耗时，那么measure多次就会把这个耗时问题放大。在我们的项目中，我们通过Trace信息发现App的一部分耗时是因为这个造成，所以优化ConstraintLayout显得至关重要。
+  最初，我们想到的办法是替换布局，将会measure多次的布局比如说RelativeLayout和ConstraintLayout换成只会measure一次的FrameLayout，这在一定程度上能够缓解这个问题，但是这样做毕竟治标不治本。因为在替换布局过程中，会发现很多布局文件根本就换不了，相关的同学在开发过程中选择其他布局肯定是要使用到其特别的属性。那么有没有一种办法，既能减少原有布局的measure次数，又能保证不影响到其本身的特性呢？基于此，我去阅读了ConstraintLayout相关源码，了解其内部实现原理，思考出一种方案，用以减少ConstraintLayout的measure次数，进而减少measure的耗时。</string>
 </resources>

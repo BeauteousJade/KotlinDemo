@@ -30,6 +30,7 @@
         <activity android:name=".page.constraint.ConstraintDemoActivity" />
         <activity android:name=".page.fragment.TestFragmentActivity" />
         <activity android:name=".page.aspectj.AspectJDemoActivity" />
+        <activity android:name=".page.nested.NestedScrollActivity" />
     </application>
 
 </manifest>
