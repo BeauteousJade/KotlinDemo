@@ -8,10 +8,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <View
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:background="#5FF"
+            android:gravity="center"
+            android:text="AppBarLayout"
+            android:textSize="30sp"
+            android:textStyle="bold"
             app:layout_scrollFlags="scroll|exitUntilCollapsed" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -22,68 +26,104 @@
         android:background="#FFFF00"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <View
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:background="#123123" />
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="CustomScrolledViewGroup"
+            android:background="#00FF00" />
 
-        <View
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:background="#123123" />
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="CustomScrolledViewGroup"
+            android:background="#00FF00" />
 
-        <View
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:background="#123123" />
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="CustomScrolledViewGroup"
+            android:background="#00FF00" />
 
-        <View
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:background="#123123" />
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="CustomScrolledViewGroup"
+            android:background="#00FF00" />
 
-        <View
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:background="#123123" />
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="CustomScrolledViewGroup"
+            android:background="#00FF00" />
 
 
-        <View
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:background="#123123" />
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="CustomScrolledViewGroup"
+            android:background="#00FF00" />
 
-        <View
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:background="#123123" />
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="CustomScrolledViewGroup"
+            android:background="#00FF00" />
 
-        <View
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:background="#123123" />
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="CustomScrolledViewGroup"
+            android:background="#00FF00" />
 
-        <View
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:background="#123123" />
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="CustomScrolledViewGroup"
+            android:background="#00FF00" />
     </com.jade.kotlindemo.page.nested.CustomNestedViewGroup>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
