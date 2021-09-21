@@ -151,7 +151,6 @@ class CustomNestedViewGroup @JvmOverloads constructor(
             mNestedYOffset = 0
         }
         val vtev = MotionEvent.obtain(event)
-        Log.i("pby123", "mNestedYOffset = $mNestedYOffset, y = ${event.getY(mActivePointerId)}")
         vtev.offsetLocation(0f, mNestedYOffset.toFloat())
         when (action) {
             MotionEvent.ACTION_DOWN -> {
@@ -167,6 +166,7 @@ class CustomNestedViewGroup @JvmOverloads constructor(
                 startNestedScroll(ViewCompat.SCROLL_AXIS_VERTICAL, ViewCompat.TYPE_TOUCH)
             }
             MotionEvent.ACTION_MOVE -> {
+                Log.i("pby123", "move")
                 val pointerIndex = event.findPointerIndex(mActivePointerId)
                 if (pointerIndex == -1) {
                     return true
@@ -336,7 +336,7 @@ class CustomNestedViewGroup @JvmOverloads constructor(
 
     private fun runAnimatedScroll() {
         startNestedScroll(ViewCompat.SCROLL_AXIS_VERTICAL, ViewCompat.TYPE_NON_TOUCH)
-        mLastMotionY = scrollY
+        mLastScrollY = scrollY
         ViewCompat.postInvalidateOnAnimation(this)
     }
 

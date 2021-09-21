@@ -34,7 +34,7 @@
             android:gravity="center"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="CustomScrolledViewGroup"
+            android:text="CustomNestedViewGroup"
             android:background="#00FF00" />
 
         <TextView
@@ -45,7 +45,7 @@
             android:gravity="center"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="CustomScrolledViewGroup"
+            android:text="CustomNestedViewGroup"
             android:background="#00FF00" />
 
         <TextView
@@ -56,7 +56,7 @@
             android:gravity="center"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="CustomScrolledViewGroup"
+            android:text="CustomNestedViewGroup"
             android:background="#00FF00" />
 
         <TextView
@@ -67,7 +67,7 @@
             android:gravity="center"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="CustomScrolledViewGroup"
+            android:text="CustomNestedViewGroup"
             android:background="#00FF00" />
 
         <TextView
@@ -78,7 +78,7 @@
             android:gravity="center"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="CustomScrolledViewGroup"
+            android:text="CustomNestedViewGroup"
             android:background="#00FF00" />
 
 
@@ -90,7 +90,7 @@
             android:gravity="center"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="CustomScrolledViewGroup"
+            android:text="CustomNestedViewGroup"
             android:background="#00FF00" />
 
         <TextView
@@ -101,7 +101,7 @@
             android:gravity="center"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="CustomScrolledViewGroup"
+            android:text="CustomNestedViewGroup"
             android:background="#00FF00" />
 
         <TextView
@@ -112,7 +112,7 @@
             android:gravity="center"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="CustomScrolledViewGroup"
+            android:text="CustomNestedViewGroup"
             android:background="#00FF00" />
 
         <TextView
@@ -123,7 +123,7 @@
             android:gravity="center"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="CustomScrolledViewGroup"
+            android:text="CustomNestedViewGroup"
             android:background="#00FF00" />
     </com.jade.kotlindemo.page.nested.CustomNestedViewGroup>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
