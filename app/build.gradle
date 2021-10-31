@@ -5,13 +5,13 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'android-aspectjx'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.jade.kotlindemo"
         minSdkVersion 16
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -79,5 +79,9 @@ dependencies {
     api 'org.aspectj:aspectjrt:1.9.5'
 
     implementation 'com.google.android.material:material:1.4.0'
+
+    def nav_version = "2.3.5"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
 }
