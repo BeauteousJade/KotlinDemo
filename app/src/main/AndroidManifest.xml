@@ -31,6 +31,7 @@
         <activity android:name=".page.fragment.TestFragmentActivity" />
         <activity android:name=".page.aspectj.AspectJDemoActivity" />
         <activity android:name=".page.nested.NestedScrollActivity" />
+        <activity android:name=".page.nav.NavActivity" />
     </application>
 
 </manifest>
