@@ -69,7 +69,7 @@ open class NavBaseFragment : Fragment() {
         log("onDestroy")
     }
 
-    private fun log(msg: String) {
+    protected fun log(msg: String) {
         Log.i(mTag, "$msg, hashCode = ${this.hashCode()}")
     }
 }

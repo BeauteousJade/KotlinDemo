@@ -62,6 +62,11 @@ class NavChildFragment1 : NavBaseFragment() {
         )
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        log(arguments.toString())
+    }
+
     override fun getLayoutId(): Int {
         return R.layout.fragment_nav_child1
     }
