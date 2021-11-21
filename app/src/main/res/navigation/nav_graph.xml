@@ -4,6 +4,8 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/navChildFragment1">
 
+    <include app:graph="@navigation/common_nav_graph" />
+
     <fragment
         android:id="@+id/navChildFragment1"
         android:name="com.jade.kotlindemo.page.nav.NavChildFragment1"
@@ -22,6 +24,9 @@
         <action
             android:id="@+id/action_navThirdActivity"
             app:destination="@id/navThirdActivity" />
+        <action
+            android:id="@+id/action_navChildFragment1_to_navigation"
+            app:destination="@id/common_nav_graph" />
     </fragment>
     <fragment
         android:id="@+id/navChildFragment2"

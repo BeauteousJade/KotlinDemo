@@ -15,6 +15,8 @@ class NavChildFragment1 : NavBaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         val button1 = view.findViewById<Button>(R.id.button1)
         val button2 = view.findViewById<Button>(R.id.button2)
+        val button3 = view.findViewById<Button>(R.id.button3)
+        val button4 = view.findViewById<Button>(R.id.button4)
         button1.setOnClickListener {
             val action =
                 NavChildFragment1Directions.actionNavChildFragment1ToNavChildFragment2()
@@ -27,6 +29,10 @@ class NavChildFragment1 : NavBaseFragment() {
         button3.setOnClickListener {
             val action = NavChildFragment1Directions.actionNavThirdActivity()
             findNavController().navigate(action.actionId, bundleOf("userId" to "pby123"))
+        }
+        button4.setOnClickListener {
+            val action = NavChildFragment1Directions.actionNavChildFragment1ToNavigation();
+            findNavController().navigate(action.actionId)
         }
     }
 
