@@ -16,13 +16,17 @@
             android:defaultValue="navChildFragment1" />
         <action
             android:id="@+id/action_navChildFragment1_to_navChildFragment2"
-            app:destination="@id/navChildFragment2">
+            app:destination="@id/navChildFragment2"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim">
             <argument android:name="text" />
         </action>
 
         <action
             android:id="@+id/action_navSecondActivity"
-            app:destination="@id/navSecondActivity" />
+            app:destination="@id/navSecondActivity"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
 
         <action
             android:id="@+id/action_navThirdActivity"
