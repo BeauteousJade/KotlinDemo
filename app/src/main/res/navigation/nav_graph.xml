@@ -47,4 +47,9 @@
         app:action="android.intent.action.VIEW"
         app:dataPattern="jade://third?userId=${userId}"
         app:targetPackage="${applicationId}" />
+
+    <!--    全局action-->
+    <action
+        android:id="@+id/global_action_navChildFragment1_to_navigation"
+        app:destination="@id/common_nav_graph" />
 </navigation>

@@ -2,38 +2,56 @@ package com.jade.kotlindemo.page.nav
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.os.bundleOf
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.jade.kotlindemo.R
 import kotlinx.android.synthetic.main.fragment_nav_child1.*
 
 class NavChildFragment1 : NavBaseFragment() {
 
+    private lateinit var mViewGroup: ViewGroup
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val button1 = view.findViewById<Button>(R.id.button1)
-        val button2 = view.findViewById<Button>(R.id.button2)
-        val button3 = view.findViewById<Button>(R.id.button3)
-        val button4 = view.findViewById<Button>(R.id.button4)
-        button1.setOnClickListener {
+        mViewGroup = view.findViewById(R.id.viewGroup)
+        addViewWithClickListener("跳到Fragment2") {
             val action =
                 NavChildFragment1Directions.actionNavChildFragment1ToNavChildFragment2()
             findNavController().navigate(action)
         }
-        button2.setOnClickListener {
+        addViewWithClickListener("跳到Activity2") {
             val action = NavChildFragment1Directions.actionNavSecondActivity()
             findNavController().navigate(action)
         }
-        button3.setOnClickListener {
+        addViewWithClickListener("跳到Activity3") {
             val action = NavChildFragment1Directions.actionNavThirdActivity()
             findNavController().navigate(action.actionId, bundleOf("userId" to "pby123"))
         }
-        button4.setOnClickListener {
+        addViewWithClickListener("跳到CommonFragment（嵌套视图）") {
             val action = NavChildFragment1Directions.actionNavChildFragment1ToNavigation();
             findNavController().navigate(action.actionId)
         }
+        addViewWithClickListener("使用全局action跳到CommonFragment（嵌套视图）") {
+            findNavController().navigate(R.id.global_action_navChildFragment1_to_navigation)
+        }
+
+    }
+
+    private fun addViewWithClickListener(text: String, onClickListener: View.OnClickListener) {
+        val button = Button(context).apply {
+            this.text = text
+            setOnClickListener(onClickListener)
+        }
+        mViewGroup.addView(
+            button,
+            ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+        )
     }
 
     override fun getLayoutId(): Int {
