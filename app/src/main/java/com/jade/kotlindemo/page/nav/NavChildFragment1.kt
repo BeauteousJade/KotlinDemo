@@ -21,7 +21,7 @@ class NavChildFragment1 : NavBaseFragment() {
         mViewGroup = view.findViewById(R.id.viewGroup)
         addViewWithClickListener("跳到Fragment2") {
             val action =
-                NavChildFragment1Directions.actionNavChildFragment1ToNavChildFragment2()
+                NavChildFragment1Directions.actionNavChildFragment1ToNavChildFragment2("test")
             findNavController().navigate(action)
         }
         addViewWithClickListener("跳到Activity2") {

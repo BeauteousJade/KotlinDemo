@@ -16,7 +16,10 @@
             android:defaultValue="navChildFragment1" />
         <action
             android:id="@+id/action_navChildFragment1_to_navChildFragment2"
-            app:destination="@id/navChildFragment2" />
+            app:destination="@id/navChildFragment2">
+            <argument
+                android:name="text"/>
+        </action>
 
         <action
             android:id="@+id/action_navSecondActivity"
