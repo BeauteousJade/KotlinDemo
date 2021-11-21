@@ -7,13 +7,39 @@
     <fragment
         android:id="@+id/navChildFragment1"
         android:name="com.jade.kotlindemo.page.nav.NavChildFragment1"
-        android:label="NavChildFragment1" >
+        android:label="NavChildFragment1">
+        <argument
+            android:name="text"
+            android:defaultValue="navChildFragment1" />
         <action
             android:id="@+id/action_navChildFragment1_to_navChildFragment2"
             app:destination="@id/navChildFragment2" />
+
+        <action
+            android:id="@+id/action_navSecondActivity"
+            app:destination="@id/navSecondActivity" />
+
+        <action
+            android:id="@+id/action_navThirdActivity"
+            app:destination="@id/navThirdActivity" />
     </fragment>
     <fragment
         android:id="@+id/navChildFragment2"
         android:name="com.jade.kotlindemo.page.nav.NavChildFragment2"
-        android:label="NavChildFragment2" />
+        android:label="NavChildFragment2">
+        <argument
+            android:name="text"
+            android:defaultValue="navChildFragment1" />
+    </fragment>
+
+    <activity
+        android:id="@+id/navSecondActivity"
+        android:name="com.jade.kotlindemo.page.nav.NavSecondActivity"
+        android:label="navSecondActivity" />
+
+    <activity
+        android:id="@+id/navThirdActivity"
+        app:action="android.intent.action.VIEW"
+        app:dataPattern="jade://third?userId=${userId}"
+        app:targetPackage="${applicationId}" />
 </navigation>

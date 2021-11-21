@@ -1,75 +1,36 @@
 package com.jade.kotlindemo.page.nav
 
 import android.os.Bundle
-import android.util.Log
-import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
+import android.widget.Button
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
+import com.jade.kotlindemo.R
+import kotlinx.android.synthetic.main.fragment_nav_child1.*
 
-class NavChildFragment1 : Fragment() {
+class NavChildFragment1 : NavBaseFragment() {
 
-    companion object {
-        const val TAG = "NavChildFragment1"
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        log("onCreateView")
-        return TextView(inflater.context).apply {
-            text = "test1"
-            textSize = 100F
-            layoutParams = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT
-            )
-            gravity = Gravity.CENTER
-            setOnClickListener {
-                val action =
-                    NavChildFragment1Directions.actionNavChildFragment1ToNavChildFragment2()
-                findNavController().navigate(action)
-            }
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        log("onViewCreated")
+        val button1 = view.findViewById<Button>(R.id.button1)
+        val button2 = view.findViewById<Button>(R.id.button2)
+        button1.setOnClickListener {
+            val action =
+                NavChildFragment1Directions.actionNavChildFragment1ToNavChildFragment2()
+            findNavController().navigate(action)
+        }
+        button2.setOnClickListener {
+            val action = NavChildFragment1Directions.actionNavSecondActivity()
+            findNavController().navigate(action)
+        }
+        button3.setOnClickListener {
+            val action = NavChildFragment1Directions.actionNavThirdActivity()
+            findNavController().navigate(action.actionId, bundleOf("userId" to "pby123"))
+        }
     }
 
-    override fun onStart() {
-        super.onStart()
-        log("onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        log("onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        log("onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        log("onStop")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        log("onDestroy")
-    }
-
-
-    private fun log(msg: String) {
-        Log.i(TAG, msg)
+    override fun getLayoutId(): Int {
+        return R.layout.fragment_nav_child1
     }
 }

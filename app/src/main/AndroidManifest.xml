@@ -32,6 +32,18 @@
         <activity android:name=".page.aspectj.AspectJDemoActivity" />
         <activity android:name=".page.nested.NestedScrollActivity" />
         <activity android:name=".page.nav.NavActivity" />
+        <activity android:name=".page.nav.NavSecondActivity" />
+        <activity android:name=".page.nav.NavThirdActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data
+                    android:host="third"
+                    android:scheme="jade" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
