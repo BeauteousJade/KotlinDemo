@@ -70,6 +70,6 @@ open class NavBaseFragment : Fragment() {
     }
 
     private fun log(msg: String) {
-        Log.i(mTag, msg)
+        Log.i(mTag, "$msg, hashCode = ${this.hashCode()}")
     }
 }

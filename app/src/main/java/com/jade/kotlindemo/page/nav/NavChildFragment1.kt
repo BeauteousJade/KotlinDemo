@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.net.toUri
 import androidx.core.os.bundleOf
+import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.jade.kotlindemo.R
@@ -41,6 +43,9 @@ class NavChildFragment1 : NavBaseFragment() {
             "使用自动创建的方式，跳转到CommonFragment",
             Navigation.createNavigateOnClickListener(R.id.common_nav_graph)
         )
+        addViewWithClickListener("跳到循环跳转页面") {
+            findNavController().navigate(R.id.global_action_navChildFragment1_to_loop_graph)
+        }
     }
 
     private fun addViewWithClickListener(text: String, onClickListener: View.OnClickListener) {

@@ -5,6 +5,7 @@
     app:startDestination="@id/navChildFragment1">
 
     <include app:graph="@navigation/common_nav_graph" />
+    <include app:graph="@navigation/loop_graph" />
 
     <fragment
         android:id="@+id/navChildFragment1"
@@ -52,4 +53,8 @@
     <action
         android:id="@+id/global_action_navChildFragment1_to_navigation"
         app:destination="@id/common_nav_graph" />
+
+    <action
+        android:id="@+id/global_action_navChildFragment1_to_loop_graph"
+        app:destination="@id/loop_graph" />
 </navigation>
