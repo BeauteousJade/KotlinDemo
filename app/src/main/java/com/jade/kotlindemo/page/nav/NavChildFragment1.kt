@@ -37,7 +37,10 @@ class NavChildFragment1 : NavBaseFragment() {
         addViewWithClickListener("使用全局action跳到CommonFragment（嵌套视图）") {
             findNavController().navigate(R.id.global_action_navChildFragment1_to_navigation)
         }
-
+        addViewWithClickListener(
+            "使用自动创建的方式，跳转到CommonFragment",
+            Navigation.createNavigateOnClickListener(R.id.common_nav_graph)
+        )
     }
 
     private fun addViewWithClickListener(text: String, onClickListener: View.OnClickListener) {
