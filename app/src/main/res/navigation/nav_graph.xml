@@ -17,8 +17,7 @@
         <action
             android:id="@+id/action_navChildFragment1_to_navChildFragment2"
             app:destination="@id/navChildFragment2">
-            <argument
-                android:name="text"/>
+            <argument android:name="text" />
         </action>
 
         <action
@@ -39,6 +38,8 @@
         <argument
             android:name="text"
             android:defaultValue="navChildFragment1" />
+
+        <deepLink app:uri="www.jade.com" />
     </fragment>
 
     <activity

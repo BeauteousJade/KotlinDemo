@@ -46,6 +46,9 @@ class NavChildFragment1 : NavBaseFragment() {
         addViewWithClickListener("跳到循环跳转页面") {
             findNavController().navigate(R.id.global_action_navChildFragment1_to_loop_graph)
         }
+        addViewWithClickListener("使用DeepLink跳转到NavChildFragment3") {
+            findNavController().navigate("http://www.jade.com".toUri())
+        }
     }
 
     private fun addViewWithClickListener(text: String, onClickListener: View.OnClickListener) {

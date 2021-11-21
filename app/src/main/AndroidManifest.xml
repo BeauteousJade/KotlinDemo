@@ -31,7 +31,9 @@
         <activity android:name=".page.fragment.TestFragmentActivity" />
         <activity android:name=".page.aspectj.AspectJDemoActivity" />
         <activity android:name=".page.nested.NestedScrollActivity" />
-        <activity android:name=".page.nav.NavActivity" />
+        <activity android:name=".page.nav.NavActivity">
+            <nav-graph android:value="@navigation/nav_graph" />
+        </activity>
         <activity android:name=".page.nav.NavSecondActivity" />
         <activity android:name=".page.nav.NavThirdActivity">
             <intent-filter>
