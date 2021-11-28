@@ -64,6 +64,11 @@ open class NavBaseFragment : Fragment() {
         log("onStop")
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        log("onDestroyView")
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         log("onDestroy")

@@ -7,7 +7,7 @@
     <include app:graph="@navigation/common_nav_graph" />
     <include app:graph="@navigation/loop_graph" />
 
-    <fragment
+    <keep_state_fragment
         android:id="@+id/navChildFragment1"
         android:name="com.jade.kotlindemo.page.nav.NavChildFragment1"
         android:label="NavChildFragment1">
@@ -34,8 +34,8 @@
         <action
             android:id="@+id/action_navChildFragment1_to_navigation"
             app:destination="@id/common_nav_graph" />
-    </fragment>
-    <fragment
+    </keep_state_fragment>
+    <keep_state_fragment
         android:id="@+id/navChildFragment2"
         android:name="com.jade.kotlindemo.page.nav.NavChildFragment2"
         android:label="NavChildFragment2">
@@ -43,8 +43,8 @@
             android:name="text"
             android:defaultValue="navChildFragment1" />
 
-        <deepLink app:uri="www.jade.com" />
-    </fragment>
+        <deepLink app:uri="kwai://www.jade.com" />
+    </keep_state_fragment>
 
     <activity
         android:id="@+id/navSecondActivity"

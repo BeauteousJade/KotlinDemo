@@ -4,7 +4,7 @@
     android:id="@+id/loop_graph"
     app:startDestination="@id/navChildFragmentA">
 
-    <fragment
+    <keep_state_fragment
         android:id="@+id/navChildFragmentA"
         android:name="com.jade.kotlindemo.page.nav.NavChildFragmentA"
         android:label="NavChildFragmentA">
@@ -12,11 +12,11 @@
         <action
             android:id="@+id/action_a_to_b"
             app:destination="@id/navChildFragmentB"
-            app:popUpTo="@id/navChildFragmentB"
-            app:popUpToInclusive="true" />
-    </fragment>
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navChildFragmentB" />
+    </keep_state_fragment>
 
-    <fragment
+    <keep_state_fragment
         android:id="@+id/navChildFragmentB"
         android:name="com.jade.kotlindemo.page.nav.NavChildFragmentB"
         android:label="NavChildFragmentB">
@@ -24,7 +24,6 @@
         <action
             android:id="@+id/action_b_to_a"
             app:destination="@id/navChildFragmentA"
-            app:popUpTo="@id/navChildFragmentA"
-            app:popUpToInclusive="true" />
-    </fragment>
+            app:popUpTo="@id/navChildFragmentA" />
+    </keep_state_fragment>
 </navigation>

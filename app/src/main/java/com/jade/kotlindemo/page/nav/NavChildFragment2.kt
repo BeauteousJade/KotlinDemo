@@ -24,4 +24,9 @@ class NavChildFragment2 : NavBaseFragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        log(arguments.toString())
+    }
+
 }
