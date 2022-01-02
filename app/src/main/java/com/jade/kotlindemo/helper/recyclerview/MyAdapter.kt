@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jade.kotlindemo.R
 import com.jade.kotlindemo.helper.Utils
 
-class MyAdapter(private val list: List<String>) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+open class MyAdapter(private val list: MutableList<String>) :
+    RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(

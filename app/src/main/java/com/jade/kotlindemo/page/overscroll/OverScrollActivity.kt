@@ -19,7 +19,7 @@ class OverScrollActivity : AppCompatActivity() {
             for (i in 0..20) {
                 add("position = $i")
             }
-        });
+        }.toMutableList());
     }
 
 }

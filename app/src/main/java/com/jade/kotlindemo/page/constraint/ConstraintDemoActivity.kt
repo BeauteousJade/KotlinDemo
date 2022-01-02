@@ -32,7 +32,7 @@ class ConstraintDemoActivity : AppCompatActivity() {
             for (index in 0..100) {
                 add("position = $index")
             }
-        })
+        }.toMutableList())
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 

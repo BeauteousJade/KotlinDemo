@@ -19,6 +19,7 @@ import com.jade.kotlindemo.page.nested.NestedScrollActivity
 import com.jade.kotlindemo.page.overscroll.OverScrollActivity
 import com.jade.kotlindemo.page.paging3.Paging3RouterActivity
 import com.jade.kotlindemo.page.paging3.page.Paging3WithNetWorkActivity
+import com.jade.kotlindemo.page.recycler.RecyclerViewActivity
 import com.jade.kotlindemo.page.room.RoomActivity
 
 class MainActivity : AppCompatActivity() {
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         addPage<NestedScrollActivity>("nestedScroll")
         addPage<NavActivity>("Nav")
         addPage<OverScrollActivity>("overScroll")
+        addPage<RecyclerViewActivity>("recyclerView")
     }
 
     private fun init() {

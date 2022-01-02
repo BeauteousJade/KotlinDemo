@@ -47,6 +47,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".page.overscroll.OverScrollActivity" />
+        <activity android:name=".page.recycler.RecyclerViewActivity" />
     </application>
 
 </manifest>
