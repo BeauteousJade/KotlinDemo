@@ -14,6 +14,7 @@ import com.jade.kotlindemo.page.aspectj.AspectJDemoActivity
 import com.jade.kotlindemo.page.constraint.ConstraintDemoActivity
 import com.jade.kotlindemo.page.flow.FlowActivity
 import com.jade.kotlindemo.page.fragment.TestFragmentActivity
+import com.jade.kotlindemo.page.launchMode.LaunchModeMainActivity
 import com.jade.kotlindemo.page.nav.NavActivity
 import com.jade.kotlindemo.page.nested.NestedScrollActivity
 import com.jade.kotlindemo.page.overscroll.OverScrollActivity
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         addPage<NavActivity>("Nav")
         addPage<OverScrollActivity>("overScroll")
         addPage<RecyclerViewActivity>("recyclerView")
+        addPage<LaunchModeMainActivity>("launchMode")
     }
 
     private fun init() {

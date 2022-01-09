@@ -48,6 +48,12 @@
         </activity>
         <activity android:name=".page.overscroll.OverScrollActivity" />
         <activity android:name=".page.recycler.RecyclerViewActivity" />
+
+        <activity android:name=".page.launchMode.LaunchModeMainActivity" />
+        <activity
+            android:name=".page.launchMode.LaunchModeSecondActivity"
+            android:taskAffinity="com.jade.kotlindemo.second" />
+        <activity android:name=".page.launchMode.LaunchModeThirdActivity" />
     </application>
 
 </manifest>
