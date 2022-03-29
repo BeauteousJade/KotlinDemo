@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +18,6 @@ import com.jade.kotlindemo.page.nav.NavActivity
 import com.jade.kotlindemo.page.nested.NestedScrollActivity
 import com.jade.kotlindemo.page.overscroll.OverScrollActivity
 import com.jade.kotlindemo.page.paging3.Paging3RouterActivity
-import com.jade.kotlindemo.page.paging3.page.Paging3WithNetWorkActivity
 import com.jade.kotlindemo.page.recycler.RecyclerViewActivity
 import com.jade.kotlindemo.page.room.RoomActivity
 

@@ -6,7 +6,7 @@
 
 
     <application
-        android:name=".App"
+        android:name=".MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,11 +33,13 @@
         <activity android:name=".page.fragment.TestFragmentActivity" />
         <activity android:name=".page.aspectj.AspectJDemoActivity" />
         <activity android:name=".page.nested.NestedScrollActivity" />
-        <activity android:name=".page.nav.NavActivity">
+        <activity android:name=".page.nav.NavActivity"
+            android:exported="true">
             <nav-graph android:value="@navigation/nav_graph" />
         </activity>
         <activity android:name=".page.nav.NavSecondActivity" />
-        <activity android:name=".page.nav.NavThirdActivity">
+        <activity android:name=".page.nav.NavThirdActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <data
@@ -54,6 +58,11 @@
             android:name=".page.launchMode.LaunchModeSecondActivity"
             android:taskAffinity="com.jade.kotlindemo.second" />
         <activity android:name=".page.launchMode.LaunchModeThirdActivity" />
+
+        <provider
+            android:name=".MyContentProvider"
+            android:authorities="{applicationId}.my_content_provider"
+            android:enabled="true" />
     </application>
 
 </manifest>
