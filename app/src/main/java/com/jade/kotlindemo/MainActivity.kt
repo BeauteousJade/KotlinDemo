@@ -11,6 +11,7 @@ import com.jade.kotlindemo.helper.DataBaseHelper
 import com.jade.kotlindemo.page.animation.AnimationActivity
 import com.jade.kotlindemo.page.aspectj.AspectJDemoActivity
 import com.jade.kotlindemo.page.constraint.ConstraintDemoActivity
+import com.jade.kotlindemo.page.finish.LifecycleActivity
 import com.jade.kotlindemo.page.flow.FlowActivity
 import com.jade.kotlindemo.page.fragment.TestFragmentActivity
 import com.jade.kotlindemo.page.launchMode.LaunchModeMainActivity
@@ -20,6 +21,7 @@ import com.jade.kotlindemo.page.overscroll.OverScrollActivity
 import com.jade.kotlindemo.page.paging3.Paging3RouterActivity
 import com.jade.kotlindemo.page.recycler.RecyclerViewActivity
 import com.jade.kotlindemo.page.room.RoomActivity
+import kotlinx.android.synthetic.main.activity_fragment_test.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         addPage<OverScrollActivity>("overScroll")
         addPage<RecyclerViewActivity>("recyclerView")
         addPage<LaunchModeMainActivity>("launchMode")
+        addPage<LifecycleActivity>("test Finish")
     }
 
     private fun init() {
