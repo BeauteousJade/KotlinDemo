@@ -61,6 +61,11 @@
             android:taskAffinity="com.jade.kotlindemo.second" />
         <activity android:name=".page.launchMode.LaunchModeThirdActivity" />
         <activity android:name=".page.finish.LifecycleActivity" />
+        <activity android:name=".page.aidl.AidlActivity" />
+
+        <service
+            android:name=".page.aidl.AidlService"
+            android:process=":aidl" />
 
         <provider
             android:name=".MyContentProvider"
