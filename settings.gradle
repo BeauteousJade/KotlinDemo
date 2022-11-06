@@ -1,4 +1,4 @@
 include ':app'
 rootProject.name = "KotlinDemo"
-include ':constraint'
-include ':solver'
+//include ':constraint'
+//include ':solver'

@@ -102,4 +102,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.3'
 
     implementation 'com.tencent:mmkv:1.2.13'
+
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+
 }

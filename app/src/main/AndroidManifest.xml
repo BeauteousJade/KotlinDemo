@@ -62,6 +62,8 @@
         <activity android:name=".page.launchMode.LaunchModeThirdActivity" />
         <activity android:name=".page.finish.LifecycleActivity" />
         <activity android:name=".page.aidl.AidlActivity" />
+        <activity android:name=".page.dataStore.DataStoreActivity" />
+        <activity android:name=".page.dataStore.PreferencesDataStoreActivity" />
 
         <service
             android:name=".page.aidl.AidlService"
